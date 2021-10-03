@@ -17,3 +17,4 @@ export const Form: React.FC<Props> = ({ children, justifyContent }) => {
 export { Input } from './Input'
 export { Button } from './Button'
 export { Fields } from './Fields'
+export { TransactionTypeButton } from './TransactionTypeButton'
