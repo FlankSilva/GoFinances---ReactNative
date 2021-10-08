@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Body } from '../../../utils/defaultStyles'
-import { Form, Input, Button, Fields, TransactionTypeButton } from '../../elements/Form'
+import { Form, Input, Button, Fields, TransactionTypeButton, CategorySelect } from '../../elements/Form'
 import { Heading } from '../../elements/Heading';
 import { Row } from '../../../utils/defaultStyles'
 
@@ -39,6 +39,7 @@ export const RegisterPage: React.FC = () => {
               isActive={transactionType === 'down'}
             />
           </Row>
+          <CategorySelect title="Selecionar"/>
         </Fields>
 
         <Button title="Salvar"/>
