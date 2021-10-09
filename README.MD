@@ -1,1 +1,1 @@
-Parei em Validação de formulario
+Parei em remover dados do AsyncStorage
