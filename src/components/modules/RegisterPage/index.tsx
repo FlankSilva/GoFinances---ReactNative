@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
+import { Modal } from 'react-native'
 
 import { Body } from '../../../utils/defaultStyles'
-import { Form, Input, Button, Fields, TransactionTypeButton, CategorySelect } from '../../elements/Form'
+
+import { CategorySelectPage } from '../CategorySelectPage'
 import { Heading } from '../../elements/Heading';
-import { Row } from '../../../utils/defaultStyles'
+import { Section } from './Section'
 
 export const RegisterPage: React.FC = () => {
   const [transactionType, setTransactionType] = useState('')
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false)
+  const [category, setCategory] = useState({
+    key: 'category',
+    name: 'Categoria'
+  })
 
   const handleTransactionTypeSelect = (type: 'up' | 'down') => {
     setTransactionType(type)
+  }
+
+  const handleOpenOrCloseModal = () => {
+    setCategoryModalOpen(!categoryModalOpen)
   }
 
   return (
     <Body>
       <Heading title="Cadastro"/>
 
-      <Form justifyContent="space-between">
-        <Fields>
-          <Input placeholder="Nome" />
-          <Input placeholder="Preço" />
-          
-          <Row 
-            justifyContent="space-between"
-            distanceTop={8}
-            distanceBotton={16}
-          >
-            <TransactionTypeButton 
-              title="Income" 
-              type="up"
-              onPress={() => handleTransactionTypeSelect('up')}
-              isActive={transactionType === 'up'}
-            />
-            <TransactionTypeButton 
-              title="Outcome" 
-              type="down"
-              onPress={() => handleTransactionTypeSelect('down')}
-              isActive={transactionType === 'down'}
-            />
-          </Row>
-          <CategorySelect title="Selecionar"/>
-        </Fields>
-
-        <Button title="Salvar"/>
-      </Form>
+      <Section 
+        category={category.name}
+        transactionType={transactionType}
+        handleOpenOrCloseModal={handleOpenOrCloseModal}
+        handleTransactionTypeSelect={handleTransactionTypeSelect}
+      />
+      <Modal visible={categoryModalOpen}>
+        <CategorySelectPage
+          category={category}
+          setCategory={setCategory}
+          closeSelectCategory={handleOpenOrCloseModal}
+        />
+      </Modal>
     </Body>
   )
 }

@@ -7,11 +7,15 @@ interface Props extends TouchableOpacityProps {
   title: string;
 }
 
-export const CategorySelect: React.FC<Props> = ({
-  title
+export const CategorySelectButton: React.FC<Props> = ({
+  title,
+  ...rest
 }) => {
   return (
-    <Container>
+    <Container
+      activeOpacity={0.7}
+      {...rest}
+    >
       <Title>{title}</Title>
       <Icon name="chevron-down" />
     </Container>

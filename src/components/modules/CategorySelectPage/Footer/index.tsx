@@ -3,10 +3,14 @@ import { Button } from '../../../elements/Form/Button'
 
 import { Container } from './styles';
 
-export const Footer: React.FC = () => {
+interface Props {
+  closeSelectCategory: () => void
+}
+
+export const Footer: React.FC<Props> = ({ closeSelectCategory }) => {
   return (
     <Container>
-      <Button title="Selecionar" />
+      <Button title="Selecionar" onPress={closeSelectCategory} />
     </Container>
   )
 }

@@ -9,7 +9,20 @@ import {
   Separator
  } from './styles';
 
-export const List: React.FC = () => {
+ interface CategoryProps {
+  key: string;
+  name: string
+}
+interface Props {
+  category: CategoryProps
+  setCategory: (category: CategoryProps) => void;
+}
+
+export const List: React.FC<Props> = ({ setCategory, category }) => {
+  const handleCategorySelect = (category: CategoryProps) => {
+    setCategory(category)
+  }
+
   return (
     <FlatList
         data={categories}
@@ -19,7 +32,10 @@ export const List: React.FC = () => {
         }}
         keyExtractor={(item) => item.key}
         renderItem={({ item }) => (
-          <Category>
+          <Category
+            onPress={() => handleCategorySelect(item)}
+            isActive={category.key === item.key}
+          >
             <Icon name={item.icon}/>
             <Name>
               {item.name}

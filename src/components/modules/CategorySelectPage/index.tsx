@@ -12,7 +12,7 @@ interface CategoryProps {
 }
 
 interface Props {
-  category: string;
+  category: CategoryProps;
   setCategory: (category: CategoryProps) => void;
   closeSelectCategory: () => void;
 }
@@ -25,8 +25,8 @@ export const CategorySelectPage: React.FC<Props> = ({
   return (
     <Body>
       <Heading title="Categoria"/>
-      <List />
-      <Footer />
+      <List setCategory={setCategory} category={category}/>
+      <Footer {...{ closeSelectCategory }} />
     </Body>
   )
 }
