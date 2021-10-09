@@ -7,12 +7,12 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins'
+import { StatusBar } from 'expo-status-bar'
+
 import { theme } from './src/global/styles/theme';
 
-import { Dashboard } from './src/pages/Dashboard';
-import { Register } from './src/pages/Register'
-import { CategorySelect } from './src/pages/CategorySelect'
-
+import { NavigationContainer } from '@react-navigation/native'
+import { AppRoutes } from './src/routes/app.routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,9 +27,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <Dashboard /> */}
-      <Register />
-      {/* <CategorySelect /> */}
+      <StatusBar style="light" backgroundColor="transparent" translucent/>
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
