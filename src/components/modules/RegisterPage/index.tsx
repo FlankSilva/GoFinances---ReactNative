@@ -61,7 +61,7 @@ export const RegisterPage: React.FC = () => {
     const { name, amount } = form
     const { key } = category
 
-    const data = {
+    const newTransaction = {
       name,
       amount,
       transactionType,
@@ -69,7 +69,15 @@ export const RegisterPage: React.FC = () => {
     }
 
     try { 
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const data = await AsyncStorage.getItem(dataKey)
+      const currentData = data ? JSON.parse(data) : []
+
+      const dataFormated = [
+        ...currentData,
+        newTransaction
+      ]
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormated));
 
     } catch (error) {
       console.log(error);
@@ -77,14 +85,18 @@ export const RegisterPage: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    const loadData = async () => {
-      const data =  await AsyncStorage.getItem(dataKey)
-      console.log(JSON.parse(data!));
-      
-    }
+  const loadData = async () => {
+    const data =  await AsyncStorage.getItem(dataKey)
+    console.log(JSON.parse(data!));
+  }
 
+  const removeItem = async () => {
+    await AsyncStorage.removeItem(dataKey)
+  }
+
+  useEffect(() => {
     loadData()
+    // removeItem()
   }, [])
 
   return (
