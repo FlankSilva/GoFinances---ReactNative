@@ -1,1 +1,0 @@
-Parei em remover dados do AsyncStorage
